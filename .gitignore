@@ -1,2 +1,2 @@
-traefik_dynamic/selfsigned.crt
-traefik_dynamic/selfsigned.key
+./traefik_dynamic/selfsigned.crt
+./traefik_dynamic/selfsigned.key
