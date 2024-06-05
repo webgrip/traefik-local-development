@@ -1,2 +1,5 @@
-traefik_dynamic/selfsigned.crt
-traefik_dynamic/selfsigned.key
+.idea/
+traefik
+!traefik/**/*.toml
+letsencrypt/
+logs/

@@ -1,0 +1,33 @@
+[api]
+dashboard = true
+
+[serversTransport]
+insecureSkipVerify = true
+
+[entryPoints]
+[entryPoints.web]
+address = ":80"
+
+[entryPoints.websecure]
+address = ":443"
+
+[providers]
+
+[providers.docker]
+watch = true
+endpoint = "unix:///var/run/docker.sock"
+exposedByDefault = false
+
+[providers.file]
+directory = "/etc/traefik/dynamic"
+filename = "/ssl.toml"
+
+[log]
+level = "DEBUG"
+#filePath = "/var/log/traefik/traefik.log"
+
+#[certificatesResolvers.myresolver.acme]
+#    email = "ryan@webgrip.nl"
+#    storage = "/letsencrypt/acme.json"
+#    [certificatesResolvers.myresolver.acme.httpChallenge]
+#        entryPoint = "web"
