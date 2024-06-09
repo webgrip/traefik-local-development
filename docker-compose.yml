@@ -42,10 +42,11 @@ services:
     restart: unless-stopped
     volumes:
       - ./resolver:/etc/resolver
+    networks:
+      - localnet
 
 networks:
-  default:
-    external: true
-    name: magento
+  localnet:
+    driver: bridge
 
 
