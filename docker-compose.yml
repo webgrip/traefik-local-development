@@ -45,11 +45,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./resolver:/etc/resolver
-    networks:
-      - localnet
 
 networks:
-  localnet:
-    driver: bridge
-
-
+  default:
+    external: true
+    name: webgrip
