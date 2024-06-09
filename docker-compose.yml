@@ -1,5 +1,6 @@
 services:
   traefik:
+    container_name: traefik
     image: traefik:v3.0.1
     security_opt:
       - no-new-privileges:true
@@ -16,8 +17,6 @@ services:
 #      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
 #      - "--certificatesresolvers.myresolver.acme.email=ryan@webgrip.nl"
 #      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    env_file:
-      - .env
     ports:
       - "80:80"
       - "443:443"
@@ -30,11 +29,12 @@ services:
       - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
       - "./traefik/dynamic:/etc/traefik/dynamic:ro"
       - "./logs:/var/log/traefik"
+      - "./.htpasswd:/etc/traefik/.htpasswd"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
       - "traefik.http.routers.traefik.rule=Host(`dashboard.traefik.test`)"
-      - "traefik.http.middlewares.traefik-auth.basicauth.users=${TRAEFIK_DASHBOARD_CREDENTIALS}"
+      - "traefik.http.middlewares.traefik-auth.basicauth.usersfile=/etc/traefik/.htpasswd"
       - "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.sslheaders.headers.customrequestheaders.X-Forwarded-Proto=https"
       - "traefik.http.routers.traefik.middlewares=traefik-https-redirect"

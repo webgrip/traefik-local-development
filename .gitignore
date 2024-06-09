@@ -3,4 +3,4 @@ traefik
 !traefik/**/*.yml
 letsencrypt/
 logs/
-.env
+.htpasswd
