@@ -6,10 +6,14 @@ I use docker-compose to run the services
 
 # How to run
 ```bash
-mkcert -install
-mkcert -cert-file traefik/dynamic/cert.pem -key-file traefik/dynamic/key.pem "*.test" "*.traefik.test" "semver-actions.test"
 echo $(htpasswd -nB admin) > .htpasswd
-docker-compose up
+docker-compose up -d
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/rootCA.pem
+```
+
+# How to reload
+```bash
+docker kill --signal=HUP  <container id>
 ```
 
 https://dashboard.traefik.test

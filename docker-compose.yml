@@ -1,22 +1,13 @@
 services:
   traefik:
+    depends_on:
+      - traefik-mkcert
     container_name: traefik
     image: traefik:v3.0.1
     security_opt:
       - no-new-privileges:true
     command:
       - "--configFile=/etc/traefik/traefik.yml"
-      - "--api.dashboard=true"
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.http.address=:80"
-      - "--entrypoints.https.address=:443"
-      - "--providers.file.directory=/etc/traefik/dynamic"
-#      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
-#      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
-#      - "--certificatesresolvers.myresolver.acme.email=ryan@webgrip.nl"
-#      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
       - "443:443"
@@ -25,11 +16,11 @@ services:
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./data:/letsencrypt:ro"
-      - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
-      - "./traefik/dynamic:/etc/traefik/dynamic:ro"
-      - "./logs:/var/log/traefik"
-      - "./.htpasswd:/etc/traefik/.htpasswd"
+      - "certificate-data:/etc/traefik/dynamic"
+      - "./config/traefik.yml:/etc/traefik/traefik.yml"
+      #- "./config/ssl.yml:/etc/traefik/dynamic/ssl.yml"
+      - "./logs:/var/log/traefik:rw"
+      - "./.htpasswd:/etc/traefik/.htpasswd:ro"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=http"
@@ -59,7 +50,22 @@ services:
     volumes:
       - ./resolver:/etc/resolver
 
+  traefik-mkcert:
+    container_name: traefik-mkcert
+    build:
+      context: ./ops/docker/mkcert
+      dockerfile: Dockerfile
+    volumes:
+      - ~/.config/mkcert:/root/.local/share/mkcert:rw
+      - certificate-data:/certitificate-data:rw
+      - ./ops/docker/mkcert/entrypoint.sh:/app/entrypoint.sh:ro
+    entrypoint: ["/app/entrypoint.sh"]
+
 networks:
   default:
     external: true
     name: webgrip
+
+volumes:
+  certificate-data:
+    external: true
