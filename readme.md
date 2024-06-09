@@ -1,8 +1,15 @@
 # How to run
 ```bash
-openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
-# Move them to traefik/dynamic
+mkcert -install
+mkcert -cert-file traefik/dynamic/cert.pem -key-file traefik/dynamic/key.pem "*.test" "*.traefik.test" "semver-actions.test"
 docker-compose up
 ```
+
+# How to make your own user:
+```bash
+echo $(htpasswd -nB admin) | sed -e s/\\$/\\$\\$/g
+```
+
+Then enter the password you want, and paste it into `TRAEFIK_DASHBOARD_CREDENTIALS` in the `.env` file.
 
 https://dashboard.traefik.test

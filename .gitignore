@@ -1,5 +1,6 @@
 .idea/
 traefik
-!traefik/**/*.toml
+!traefik/**/*.yml
 letsencrypt/
 logs/
+.env
