@@ -30,7 +30,22 @@ services:
       - "traefik.http.routers.api.rule=Host(`monitor.test`)"
       - "traefik.http.routers.api.service=api@internal"
 
+  dnsmasq:
+    image: jpillora/dnsmasq
+    container_name: dnsmasq
+    ports:
+      - "53:53/udp"
+    cap_add:
+      - NET_ADMIN
+    command: >
+      -A /test/127.0.0.1
+    restart: unless-stopped
+    volumes:
+      - ./resolver:/etc/resolver
+
 networks:
   default:
     external: true
     name: magento
+
+
