@@ -43,7 +43,7 @@ services:
     - "traefik.http.routers.YOUR-SERVICE-secure.tls=true"
     - "traefik.http.routers.YOUR-SERVICE-secure.tls.domains[0].main=YOUR-DOMAIN.test"
     - "traefik.http.routers.YOUR-SERVICE-secure.tls.domains[0].sans=*.YOUR-DOMAIN.test"
-    - "traefik.http.routers.YOUR-SERVICE-secure.service=grafana-YOUR-DOMAIN"
+    - "traefik.http.routers.YOUR-SERVICE-secure.service=YOUR-DOMAIN"
 ```
 
 # How to add certificates for new domains
