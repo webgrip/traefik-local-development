@@ -68,7 +68,7 @@ services:
 
   traefik-mkcert:
     container_name: traefik-mkcert
-    image: webgrip/traefik-mkcert:latest
+    image: webgrip/traefik-local-development-mkcert:latest
     build:
       context: ./ops/docker/mkcert
       dockerfile: Dockerfile
@@ -77,11 +77,6 @@ services:
       - certificate-data:/certificate-data:rw
       - ./ops/docker/mkcert/entrypoint.sh:/app/entrypoint.sh:ro
     entrypoint: ["/app/entrypoint.sh", "traefik.test", "dashboard.traefik.test"]
-    healthcheck:
-      test: [ "CMD", "test", "-f", "/certificate-data/healthy" ]
-      interval: 1s
-      timeout: 5s
-      retries: 5
 
 networks:
   default:
