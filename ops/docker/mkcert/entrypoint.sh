@@ -37,5 +37,8 @@ done
 # Signal that the service is healthy
 touch /certificate-data/healthy
 
+sleep 1
+
 #Keep running
-tail -f /dev/null
+
+#tail -f /dev/null

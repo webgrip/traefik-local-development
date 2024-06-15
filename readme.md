@@ -44,6 +44,9 @@ services:
     - "traefik.http.routers.YOUR-SERVICE-secure.tls.domains[0].main=YOUR-DOMAIN.test"
     - "traefik.http.routers.YOUR-SERVICE-secure.tls.domains[0].sans=*.YOUR-DOMAIN.test"
     - "traefik.http.routers.YOUR-SERVICE-secure.service=YOUR-SERVICE"
+    - "traefik.http.services.YOUR-SERVICE.loadbalancer.server.scheme=https"
+    - "traefik.http.services.YOUR-SERVICE.loadbalancer.server.port=YOUR-PORT"
+
 ```
 
 # How to add certificates for new domains

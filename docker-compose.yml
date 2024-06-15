@@ -15,7 +15,7 @@ services:
     <<: *default-opts
     depends_on:
       traefik-mkcert:
-        condition: service_healthy
+        condition: service_completed_successfully
     container_name: traefik
     image: traefik:v3.0.1
     restart: always
