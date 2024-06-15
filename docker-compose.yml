@@ -7,8 +7,6 @@ x-default-opts:
 configs:
   traefik.yml:
     file: ./config/traefik.yml
-  ssl.yml:
-    file: ./config/ssl.yml
 
 services:
   traefik:
