@@ -1,16 +1,9 @@
 tls:
   certificates:
-  { { range $i, $e := until 10 } }
-  - certFile: "/etc/traefik/cert-{{ $e }}.pem"
-    keyFile: "/etc/traefik/cert-{{ $e }}.key"
-    store:
-      - "my-store-foo-{{ $e }}"
-      - "my-store-bar-{{ $e }}"
-  {{end}}
-    - certFile: "/etc/traefik/dynamic/cert.pem"
-      keyFile: "/etc/traefik/dynamic/key.pem"
-      stores:
-        - default
+  - certFile: "/etc/traefik/dynamic/cert.pem"
+    keyFile: "/etc/traefik/dynamic/key.pem"
+    stores:
+      - default
   stores:
     default:
       defaultCertificate:

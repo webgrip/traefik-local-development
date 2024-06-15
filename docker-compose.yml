@@ -1,9 +1,24 @@
+x-default-opts:
+  &default-opts
+  logging:
+    options:
+      max-size: "10m"
+
+configs:
+  traefik.yml:
+    file: ./config/traefik.yml
+  ssl.yml:
+    file: ./config/ssl.yml
+
 services:
   traefik:
+    <<: *default-opts
     depends_on:
-      - traefik-mkcert
+      traefik-mkcert:
+        condition: service_healthy
     container_name: traefik
     image: traefik:v3.0.1
+    restart: always
     security_opt:
       - no-new-privileges:true
     command:
@@ -13,12 +28,15 @@ services:
       - "443:443"
       - "8998:8998"
       - "8999:8999"
+    configs:
+      - source: traefik.yml
+        target: /etc/traefik/traefik.yml
+      - source: ssl.yml
+        target: /etc/traefik/dynamic/ssl.yml
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "certificate-data:/etc/traefik/dynamic"
-      - "./config/traefik.yml:/etc/traefik/traefik.yml"
-      #- "./config/ssl.yml:/etc/traefik/dynamic/ssl.yml"
+      - "certificate-data:/etc/traefik/dynamic:rw"
       - "./logs:/var/log/traefik:rw"
       - "./.htpasswd:/etc/traefik/.htpasswd:ro"
     labels:
@@ -60,6 +78,11 @@ services:
       - certificate-data:/certitificate-data:rw
       - ./ops/docker/mkcert/entrypoint.sh:/app/entrypoint.sh:ro
     entrypoint: ["/app/entrypoint.sh"]
+    healthcheck:
+      test: [ "CMD", "test", "-f", "/certitificate-data/healthy" ]
+      interval: 1s
+      timeout: 5s
+      retries: 5
 
 networks:
   default:

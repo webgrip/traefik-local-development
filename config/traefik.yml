@@ -26,7 +26,8 @@ providers:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
   file:
-    directory: "/var/traefik/dynamic"
+#    directory: "/var/traefik/dynamic"
+    filename: "/etc/traefik/dynamic/ssl.yml"
     watch: true
 
 metrics:
