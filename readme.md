@@ -6,9 +6,19 @@ I use docker-compose to run the services
 
 # How to run
 ```bash
-echo $(htpasswd -nB admin) > .htpasswd
-docker-compose up -d
-sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain /path/to/rootCA.pem
+echo $(htpasswd -nB admin) > .htpasswd 
+docker-compose up
+```
+
+# How to trust your generated root certificate on macOS
+```bash
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ~/.config/mkcert/rootCA.pem
+```
+
+# How to trust your generated root certificate on Windows
+```bash
+# Run as administrator
+certutil -addstore -f "ROOT" ~/.config/mkcert/rootCA.pem
 ```
 
 # How to reload
