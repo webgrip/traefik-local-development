@@ -31,8 +31,6 @@ services:
     configs:
       - source: traefik.yml
         target: /etc/traefik/traefik.yml
-      - source: ssl.yml
-        target: /etc/traefik/dynamic/ssl.yml
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -70,16 +68,17 @@ services:
 
   traefik-mkcert:
     container_name: traefik-mkcert
+    image: webgrip/traefik-mkcert:latest
     build:
       context: ./ops/docker/mkcert
       dockerfile: Dockerfile
     volumes:
       - ~/.config/mkcert:/root/.local/share/mkcert:rw
-      - certificate-data:/certitificate-data:rw
+      - certificate-data:/certificate-data:rw
       - ./ops/docker/mkcert/entrypoint.sh:/app/entrypoint.sh:ro
-    entrypoint: ["/app/entrypoint.sh"]
+    entrypoint: ["/app/entrypoint.sh", "traefik.test", "dashboard.traefik.test"]
     healthcheck:
-      test: [ "CMD", "test", "-f", "/certitificate-data/healthy" ]
+      test: [ "CMD", "test", "-f", "/certificate-data/healthy" ]
       interval: 1s
       timeout: 5s
       retries: 5

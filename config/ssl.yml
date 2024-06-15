@@ -1,11 +1,11 @@
 tls:
   certificates:
-  - certFile: "/etc/traefik/dynamic/cert.pem"
-    keyFile: "/etc/traefik/dynamic/key.pem"
-    stores:
-      - default
+  - certFile: "/etc/traefik/dynamic/traefik.test.crt"
+    keyFile: "/etc/traefik/dynamic/traefik.test.key"
+  - certFile: "/etc/traefik/dynamic/dashboard.traefik.test.crt"
+    keyFile: "/etc/traefik/dynamic/dashboard.traefik.test.key"
   stores:
     default:
       defaultCertificate:
-        certFile: "/etc/traefik/dynamic/cert.pem"
-        keyFile: "/etc/traefik/dynamic/key.pem"
+        - certFile: "/etc/traefik/dynamic/traefik.test.crt"
+          keyFile: "/etc/traefik/dynamic/traefik.test.key"

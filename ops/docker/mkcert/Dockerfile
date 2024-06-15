@@ -4,12 +4,12 @@ FROM alpine:latest
 # Install necessary packages
 RUN apk --no-cache add \
     curl \
-    openssl
-
+    openssl \
+    yq
 RUN curl -L -o /usr/local/bin/mkcert https://github.com/FiloSottile/mkcert/releases/download/v1.4.4/mkcert-v1.4.4-linux-amd64
 
 RUN chmod +x /usr/local/bin/mkcert
 
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /app/entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
