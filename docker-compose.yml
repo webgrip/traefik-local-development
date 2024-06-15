@@ -35,7 +35,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "certificate-data:/etc/traefik/dynamic:rw"
-      - "./logs:/var/log/traefik:rw"
+      - "./var/logs/traefik:/var/log/traefik:rw"
       - "./.htpasswd:/etc/traefik/.htpasswd:ro"
     labels:
       - "traefik.enable=true"
@@ -64,7 +64,7 @@ services:
       -A /test/127.0.0.1
     restart: unless-stopped
     volumes:
-      - ./resolver:/etc/resolver
+      - ./var/resolver:/etc/resolver
 
   traefik-mkcert:
     container_name: traefik-mkcert

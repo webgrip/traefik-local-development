@@ -1,6 +1,4 @@
 .idea/
-traefik
-!traefik/**/*.yml
 letsencrypt/
-logs/
-.htpasswd
+var/resolver/
+var/logs/
