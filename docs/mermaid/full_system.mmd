@@ -1,0 +1,45 @@
+C4Context
+    title System Context diagram for traefik-local-development
+
+    Person(userA, "User", "Developer wanting to test a service locally.")
+
+    Enterprise_Boundary(BoundaryLocalComputer, "Local system") {
+        System_Ext(SystemExternalService, "External Service", "https://external-service.test", "HTTPS")
+
+        System_Ext(SystemDns, "Your host's DNS", "DNS server")
+
+        Rel(SystemExternalService, SystemDns, "Gets IP from")
+        BiRel(SystemExternalService, SytemTraefik, "Gets routed to the correct service")
+
+        Boundary(BoundaryExternalVolumes, "External Volumes") {
+            System(VolumeCertificateData, "Certificate Data", "certificate-data")
+
+            Rel(VolumeCertificateData, SytemTraefik, "Mounts", "Volume")
+            Rel(VolumeCertificateData, SystemMkCert, "Mounts", "Volume")
+        }
+
+        Boundary(BoundaryTraefikLocalDevelopment, "traefik-local-development") {
+
+            Boundary(BoundaryTraefikApplication, "Application") {
+                System(SytemTraefik, "traefik", "Traefik")
+            }
+
+            Boundary(BounderySystemDNS, "DNS") {
+                System(SytemTraefikDnsMasq, "traefik-dnsmasq", "DnsMasq")
+                Rel(SytemTraefikDnsMasq, SystemDns, "Propagates", "DNS")
+            }
+
+
+            Boundary(BoundaryTraefikCertificates, "Certificates") {
+                System(SystemMkCert, "traefik-mkcert", "MkCert")
+
+            }
+
+            Boundary(BoundaryTraefikObservability, "Observability") {
+                System(SystemTraefikOpenTelemetryCollector, "traefik-otel-collector", "OpenTelemetry Collector")
+                System(SystemTraefikJaeger, "traefik-jaeger", "Jaeger")
+            }
+        }
+    }
+
+    Rel(userA, SystemExternalService, "Goes to https://external-service.test", "HTTPS")

@@ -1,0 +1,17 @@
+sequenceDiagram
+    participant Ryan
+    participant DNS
+    participant DNSMasq
+    participant Traefik
+    participant ExternalService
+    Ryan->>DNS: https://monitoring-platform.test
+    alt
+        DNS->>DNS: Gets IP by checking cloudflare
+    else Domain not found in public DNS
+        DNS->>DNS: Gets IP by checking DnsMasq
+    end
+    DNS->>Traefik: https://monitoring-platform.test
+    Traefik-->>Traefik: Gets service
+    Traefik-->>ExternalService: Request (monitoring-platform@docker)
+    ExternalService-->>Traefik: Return response
+    Traefik-->>Ryan: Jolly good!

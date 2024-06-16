@@ -31,18 +31,33 @@ providers:
     watch: true
 
 metrics:
-  prometheus:
-    buckets: [ 0.1,0.3,1.2,5.0 ]
+  otlp:
     addEntryPointsLabels: true
     addRoutersLabels: true
     addServicesLabels: true
-    entryPoint: "http"
-    headerLabels:
-      useragent: "User-Agent"
+    explicitBoundaries:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    pushInterval: 1s
+    grpc:
+      endpoint: traefik-otel-collector:4317
+      insecure: true
+      headers:
+        useragent: "User-Agent"
 
 tracing:
+  sampleRate: 1.0 # 100%
+  serviceName: "traefik"
+  addInternals: true
   otlp:
-    grpc: { }
+    grpc:
+      endpoint: traefik-otel-collector:4317
+      insecure: true
+#      tls:
+#        cert: /etc/traefik/dynamic/traefik.test.yml
+#        key: /etc/traefik/dynamic/traefik.test.yml
 
 log:
   level: "DEBUG"
