@@ -9,12 +9,15 @@ receivers:
 processors:
   batch:
 
-
 exporters:
   debug:
     verbosity: normal
+  otlphttp:
+    endpoint: http://traefik-otel-collector:3100/otlp
+    tls:
+      insecure: true
   otlp/tempo:
-    endpoint: http://monitoring-platform-tempo:4317
+    endpoint: http://traefik-otel-collector:4317
     tls:
       insecure: true
   prometheus:
@@ -24,6 +27,7 @@ exporters:
 
 extensions:
   health_check:
+    endpoint: "0.0.0.0:13133"
   pprof:
   zpages:
 
@@ -33,12 +37,14 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug, otlp/tempo]
+      exporters:
+        - debug
+        - otlp/tempo
     metrics:
       receivers: [otlp]
       processors: [batch]
       exporters: [debug, prometheus]
     logs:
       receivers: [otlp]
-#      processors: [batch]
-      exporters: [debug]
+      #      processors: [batch]
+      exporters: [debug, otlphttp]
