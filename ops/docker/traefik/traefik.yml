@@ -48,7 +48,7 @@ metrics:
         useragent: "User-Agent"
 
 tracing:
-  sampleRate: 1.0 # 100%
+  sampleRate: 0.1 # 10%
   serviceName: "traefik"
   addInternals: true
   otlp:
@@ -60,7 +60,7 @@ tracing:
 #        key: /etc/traefik/dynamic/traefik.test.yml
 
 log:
-  level: "DEBUG"
+  level: "INFO"
 #  filePath: "/var/log/traefik/traefik.log"
 
 accessLog:
