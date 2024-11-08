@@ -14,8 +14,7 @@ metadata:
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik'
   tags:
     - traefik
-    - proxy
-    - load balancer
+    - development
   links:
     - url: https://traefik.io/
       title: Traefik Website
