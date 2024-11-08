@@ -1,0 +1,148 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: traefik
+  namespace: webgrip
+  title: Traefik
+  description: |
+    Traefik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy.
+  labels:
+    tier: "3"
+  annotations:
+    docker.io/image: webgrip/traefik-local-development-traefik:latest
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik'
+  tags:
+    - traefik
+    - proxy
+    - load balancer
+  links:
+    - url: https://traefik.io/
+      title: Traefik Website
+      icon: link
+      type: website
+    - url: https://github.com/traefik/traefik
+      title: Source Code
+      icon: github
+      type: source
+spec:
+  type: service
+  lifecycle: development
+  owner: group:webgrip/infrastructure
+  system: traefik-local-development-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: traefik-mkcert
+  namespace: webgrip
+  title: Traefik Mkcert
+  description: |
+    Mkcert is a simple tool for making locally-trusted development certificates, used here to generate certificates for Traefik.
+  labels:
+    tier: "3"
+  annotations:
+    docker.io/image: webgrip/traefik-local-development-mkcert:latest
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-mkcert'
+  tags:
+    - development
+    - certificates
+    - security
+  links:
+    - url: https://github.com/FiloSottile/mkcert
+      title: Mkcert on GitHub
+      icon: github
+      type: source
+spec:
+  type: tool
+  lifecycle: development
+  owner: group:webgrip/infrastructure
+  system: traefik-local-development-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: traefik-dnsmasq
+  namespace: webgrip
+  title: Traefik Dnsmasq
+  description: |
+    Dnsmasq is a lightweight DNS forwarder and DHCP server, used to resolve local domains for Traefik.
+  labels:
+    tier: "3"
+  annotations:
+    docker.io/image: jpillora/dnsmasq
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-dnsmasq'
+  tags:
+    - dns
+    - dnsmasq
+    - networking
+  links:
+    - url: http://www.thekelleys.org.uk/dnsmasq/doc.html
+      title: Dnsmasq Documentation
+      icon: book
+      type: website
+spec:
+  type: service
+  lifecycle: development
+  owner: group:webgrip/infrastructure
+  system: traefik-local-development-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: traefik-otel-collector
+  namespace: webgrip
+  title: Traefik OpenTelemetry Collector
+  description: |
+    OpenTelemetry Collector for collecting telemetry data from Traefik.
+  labels:
+    tier: "3"
+  annotations:
+    docker.io/image: webgrip/traefik-local-development-otel-collector:latest
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-otel-collector'
+  tags:
+    - monitoring
+    - telemetry
+    - observability
+  links:
+    - url: https://opentelemetry.io/
+      title: OpenTelemetry Website
+      icon: link
+      type: website
+spec:
+  type: service
+  lifecycle: development
+  owner: group:webgrip/infrastructure
+  system: traefik-local-development-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: traefik-local-development-system
+  namespace: webgrip
+  title: Traefik Local Development System
+  description: |
+    The Traefik local development system is responsible for routing traffic to the correct services within the Docker network during local development, and allows you to easily generate development certificates and resolve local domains.
+  labels:
+    tier: "3"
+  annotations:
+    github.com/project-slug: webgrip/traefik-local-development
+    backstage.io/techdocs-ref: dir:.
+  tags:
+    - traefik
+    - development
+    - mkcert
+    - dnsmasq
+  links:
+    - url: https://dashboard.traefik.test
+      title: Traefik Dashboard
+      icon: dashboard
+      type: website
+spec:
+  owner: group:infrastructure
+  domain: webgrip
+  type: platform
+
