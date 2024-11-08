@@ -143,6 +143,6 @@ metadata:
       type: website
 spec:
   owner: group:infrastructure
-  domain: webgrip
+  domain: webgrip/operations
   type: platform
 
