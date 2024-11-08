@@ -142,6 +142,6 @@ metadata:
       type: website
 spec:
   owner: group:infrastructure
-  domain: webgrip/operations
+  domain: webgrip/operations-domain
   type: platform
 
