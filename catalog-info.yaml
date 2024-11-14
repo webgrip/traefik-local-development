@@ -12,6 +12,7 @@ metadata:
     docker.io/image: webgrip/traefik-local-development-traefik:latest
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik'
+    simpleicons.org/icon-slug: traefikproxy
   tags:
     - traefik
     - development
@@ -44,6 +45,7 @@ metadata:
     docker.io/image: webgrip/traefik-local-development-mkcert:latest
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-mkcert'
+    simpleicons.org/icon-slug: awssecretsmanager
   tags:
     - development
     - certificates
@@ -73,6 +75,7 @@ metadata:
     docker.io/image: jpillora/dnsmasq
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-dnsmasq'
+    simpleicons.org/icon-slug: primefaces
   tags:
     - dns
     - dnsmasq
@@ -102,6 +105,7 @@ metadata:
     docker.io/image: webgrip/traefik-local-development-otel-collector:latest
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-otel-collector'
+    simpleicons.org/icon-slug: opentelemetry
   tags:
     - monitoring
     - telemetry
@@ -130,6 +134,7 @@ metadata:
   annotations:
     github.com/project-slug: webgrip/traefik-local-development
     backstage.io/techdocs-ref: dir:.
+    simpleicons.org/icon-slug: traefikproxy
   tags:
     - traefik
     - development
