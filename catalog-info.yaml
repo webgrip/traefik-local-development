@@ -9,9 +9,10 @@ metadata:
   labels:
     tier: "3"
   annotations:
-    docker.io/image: webgrip/traefik-local-development-traefik:latest
-    backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik'
+    backstage.io/techdocs-ref: dir:.
+    docker.io/image: webgrip/traefik-local-development-traefik:latest
+    github.com/project-slug: traefik/traefik
     simpleicons.org/icon-slug: traefikproxy
   tags:
     - traefik
@@ -42,9 +43,10 @@ metadata:
   labels:
     tier: "3"
   annotations:
-    docker.io/image: webgrip/traefik-local-development-mkcert:latest
-    backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-mkcert'
+    backstage.io/techdocs-ref: dir:.
+    docker.io/image: webgrip/traefik-local-development-mkcert:latest
+    github.com/project-slug: FiloSottile/mkcert
     simpleicons.org/icon-slug: awssecretsmanager
   tags:
     - development
@@ -72,9 +74,10 @@ metadata:
   labels:
     tier: "3"
   annotations:
-    docker.io/image: jpillora/dnsmasq
-    backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-dnsmasq'
+    backstage.io/techdocs-ref: dir:.
+    docker.io/image: jpillora/dnsmasq
+    github.com/project-slug: jpillora/dnsmasq
     simpleicons.org/icon-slug: primefaces
   tags:
     - dns
@@ -102,9 +105,10 @@ metadata:
   labels:
     tier: "3"
   annotations:
-    docker.io/image: webgrip/traefik-local-development-otel-collector:latest
-    backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-label-selector: 'app.kubernetes.io/name=traefik-otel-collector'
+    backstage.io/techdocs-ref: dir:.
+    docker.io/image: webgrip/traefik-local-development-otel-collector:latest
+    github.com/project-slug: open-telemetry/opentelemetry-collector-contrib
     simpleicons.org/icon-slug: opentelemetry
   tags:
     - monitoring
@@ -132,8 +136,8 @@ metadata:
   labels:
     tier: "3"
   annotations:
-    github.com/project-slug: webgrip/traefik-local-development
     backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: webgrip/traefik-local-development
     simpleicons.org/icon-slug: traefikproxy
   tags:
     - traefik
