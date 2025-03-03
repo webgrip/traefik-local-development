@@ -92,7 +92,7 @@ services:
 networks:
   default:
     external: true
-    name: vendic
+    name: webgrip
 
 volumes:
   certificate-data:
