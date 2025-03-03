@@ -16,8 +16,6 @@ services:
         condition: service_completed_successfully
       traefik-otel-collector:
         condition: service_started
-#      traefik-tempo:
-#        condition: service_started
     container_name: traefik
     image: webgrip/traefik-local-development-traefik:latest
     pull_policy: always
@@ -88,40 +86,13 @@ services:
 
   traefik-otel-collector:
     container_name: traefik-otel-collector
-    image: webgrip/traefik-local-development-otel-collector:latest
-    build:
-      context: ./ops/docker/otel-collector
-      dockerfile: Dockerfile
+    image: webgrip/monitoring-platform-otel-collector:latest
     command: ["--config", "/etc/otelcol-contrib/config.yaml"]
-    volumes:
-      - ./ops/docker/otel-collector/config.yml:/etc/otelcol-contrib/config.yaml
-#    ports:
-#      - "1888:1888"   # pprof extension
-#      - "8888:8888"   # Prometheus metrics exposed by the collector
-#      - "8889:8889"   # Prometheus exporter metrics
-#      - "13133:13133" # health_check extension
-#      - "4317:4317"   # OTLP gRPC receiver
-#      - "4318:4318"   # OTLP HTTP receiver
-
-
-#  traefik-tempo:
-#    container_name: traefik-tempo
-#    depends_on:
-#      traefik-otel-collector:
-#        condition: service_started
-#    image: webgrip/traefik-local-development-tempo:latest
-#    build:
-#        context: ./ops/docker/tempo
-#        dockerfile: Dockerfile
-#    ports:
-#      - "3200:3200" # UI
-#      - "14250:14250" # gRPC
-#      - "14249:14249" # HTTP
 
 networks:
   default:
     external: true
-    name: webgrip
+    name: vendic
 
 volumes:
   certificate-data:

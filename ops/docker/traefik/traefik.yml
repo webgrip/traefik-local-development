@@ -49,7 +49,8 @@ metrics:
         useragent: "User-Agent"
 
 tracing:
-  sampleRate: 0.1 # 10%
+#  sampleRate: 0.1 # 10%
+  sampleRate: 1.0 # 100%
   serviceName: "traefik"
   addInternals: true
   otlp:
