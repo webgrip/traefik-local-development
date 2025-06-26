@@ -26,6 +26,12 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 # Run as administrator
 certutil -addstore -f "ROOT" ${HOME}/.config/mkcert/rootCA.pem
 ```
+
+# How to trust your generated root certificate on Linux
+```bash
+cp ~/.config/mkcert/rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
+sudo update-ca-certificates
+```
 You may need to restart your browser (a few times)
 
 # How to enable my docker-compose container to be sent through traefik-local-development?
