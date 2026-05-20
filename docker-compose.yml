@@ -72,7 +72,7 @@ services:
     entrypoint: [ "/app/entrypoint.sh", "traefik.test", "dashboard.traefik.test" ]
 
   traefik-dnsmasq:
-    image: jpillora/dnsmasq
+    image: jpillora/dnsmasq@sha256:98b69ad825942089fb7c4b9153e3c5af0205eda3a103c691e30b1a13fd912830
     container_name: traefik-dnsmasq
     ports:
       - "53:53/udp"
@@ -86,7 +86,7 @@ services:
 
   traefik-otel-collector:
     container_name: traefik-otel-collector
-    image: webgrip/monitoring-platform-otel-collector:latest
+    image: webgrip/monitoring-platform-otel-collector:latest@sha256:561a5e53c0980bd2cbfc1928c0274124b16a83ef7183d3abf7d904db6da6d5f7
     command: ["--config", "/etc/otelcol-contrib/config.yaml"]
 
 networks:
