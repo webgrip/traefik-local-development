@@ -24,7 +24,7 @@ jobs:
 
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: ops/docker/mkcert
           platforms: linux/amd64,linux/arm64
