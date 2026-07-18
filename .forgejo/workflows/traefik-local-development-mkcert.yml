@@ -1,11 +1,17 @@
 name: Build and push webgrip/traefik-local-development-mkcert:latest
 
+# Forgejo mirror of the former .github workflow (forgejo-port-workflows).
+#   - runs-on: docker (the in-cluster runner; its dind sidecar provides DOCKER_HOST, and the
+#     privileged daemon lets setup-qemu install binfmt for the arm64 half of the build)
+#   - DOCKER_USERNAME / DOCKER_TOKEN are NOT provisioned as Forgejo org secrets yet (VIK-316).
+#     Manual-dispatch-only, so nothing runs until someone triggers it — provision before running.
+
 on:
   workflow_dispatch:
 
 jobs:
   build-and-push:
-    runs-on: self-hosted
+    runs-on: docker
     steps:
       - name: Checkout
         uses: actions/checkout@v4
