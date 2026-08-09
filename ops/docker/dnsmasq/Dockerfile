@@ -1,4 +1,4 @@
-FROM alpine:3.20.3
+FROM alpine:3.24.1
 LABEL maintainer="ryan@webgrip.com"
 # webproc release settings
 ENV WEBPROC_VERSION 0.4.0

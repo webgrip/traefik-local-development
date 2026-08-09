@@ -1,5 +1,5 @@
 # Use the official lightweight Alpine Linux image
-FROM alpine:3.20.3
+FROM alpine:3.24.1
 
 # Install necessary packages
 RUN apk --no-cache add \
