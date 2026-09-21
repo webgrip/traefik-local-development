@@ -1,5 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": [
+    "local>webgrip/renovate-config#v1.9.0"
+  ],
+  "description": "Was on config:base, which Renovate renamed to config:recommended and has deprecated. The org preset extends config:recommended and adds the estate's soak, semantic-commit and dashboard-approval policy on top.",
   "fetchChangeLogs": "off"
 }
